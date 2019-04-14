@@ -184,6 +184,7 @@ public class CodeGenerator {
             if (!file.getParentFile().exists()) {
                 file.getParentFile().mkdirs();
             }
+            // restful 风格接口
             //cfg.getTemplate("controller-restful.ftl").process(data, new FileWriter(file));
             cfg.getTemplate("controller.ftl").process(data, new FileWriter(file));
 
