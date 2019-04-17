@@ -20,8 +20,4 @@ public class UserTestServiceImpl extends AbstractService<UserTest> implements Us
     @Resource
     private UserTestMapper userTestMapper;
 
-    @Override
-    public List<UserTest> findAll(){
-        return userTestMapper.findAll();
-    }
 }

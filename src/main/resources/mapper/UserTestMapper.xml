@@ -10,12 +10,4 @@
     <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
   </resultMap>
 
-  <select id="findAll" resultMap="BaseResultMap">
-    SELECT
-        id,
-        user_name,
-        user_password
-     FROM user_test
-  </select>
-
 </mapper>
