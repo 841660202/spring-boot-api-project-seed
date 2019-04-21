@@ -12,7 +12,7 @@ pipeline {
                 sh 'mvn -B -DskipTests clean package'
             }
         }
-        stage('Docker') {
+        stage('DockerV') {
             steps {
               sh 'docker -v'
           }
