@@ -184,10 +184,6 @@
             <!--</plugin>-->
             <!--&lt;!&ndash; end::plugin[] &ndash;&gt;-->
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <source>${java.version}</source>
