@@ -16,5 +16,10 @@ pipeline {
               sh './jenkins/scripts/deliver.sh'
           }
         }
+         stage('Docker') {
+            steps {
+              sh 'docker -v'
+          }
+        }
     }
 }
