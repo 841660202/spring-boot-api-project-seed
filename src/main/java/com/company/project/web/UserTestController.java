@@ -2,6 +2,7 @@ package com.company.project.web;
 import com.company.project.core.Result;
 import com.company.project.core.ResultGenerator;
 import com.company.project.model.UserTest;
+import com.company.project.model.view.UserInfo;
 import com.company.project.service.UserTestService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -53,5 +54,11 @@ public class UserTestController {
         List<UserTest> list = userTestService.findAll();
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);
+    }
+    @GetMapping("/getUserInfoById")
+    public Result getUserInfoById( @RequestParam Integer id) {
+        UserInfo userInfo = userTestService.getUserInfoById(id);
+
+        return ResultGenerator.genSuccessResult(userInfo);
     }
 }

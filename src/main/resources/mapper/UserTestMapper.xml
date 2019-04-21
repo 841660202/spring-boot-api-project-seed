@@ -1,13 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.company.project.dao.UserTestMapper">
-  <resultMap id="BaseResultMap" type="com.company.project.model.UserTest">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <result column="id" jdbcType="INTEGER" property="id" />
-    <result column="user_name" jdbcType="VARCHAR" property="userName" />
-    <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
-  </resultMap>
+    <resultMap id="BaseResultMap" type="com.company.project.model.UserTest">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="user_password" jdbcType="VARCHAR" property="userPassword"/>
+    </resultMap>
+
+    <!--含有角色权限的用户信息-->
+    <resultMap id="UserInfoResultMap" type="com.company.project.model.view.UserInfo">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+
+        <association property="role" column="role_name" javaType="com.company.project.model.Role">
+            <id column="role_id" property="id"/>
+            <result column="role_name" property="roleName"/>
+            <result column="role_code" property="roleCode"/>
+        </association>
+        <collection property="pointList" ofType="com.company.project.model.Point">
+            <!-- id:权限点的唯一标识 -->
+            <id column="point_id" property="id"/>
+            <result column="point_name" property="pointName"/>
+            <result column="point_code" property="pointCode"/>
+        </collection>
+    </resultMap>
+    <select id="getUserInfoById" resultMap="UserInfoResultMap">
+        SELECT
+            u.id,
+            u.user_name,
+            ur.user_id,
+            ur.role_id,
+            r.role_code,
+            r.role_name,
+            p.id AS point_id,
+            p.point_code,
+            p.point_name
+        FROM
+            user_test u
+            LEFT JOIN user_role ur ON u.id = ur.user_id
+            LEFT JOIN role r ON ur.role_id = r.id
+            LEFT JOIN role_point rp ON rp.role_id = ur.role_id
+            LEFT JOIN point p ON rp.point_id = p.id
+        WHERE
+            u.id = #{id}
+    </select>
 
 </mapper>
