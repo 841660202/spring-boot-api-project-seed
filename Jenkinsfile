@@ -11,15 +11,16 @@ pipeline {
                 sh 'mvn -B -DskipTests clean package'
             }
         }
+        stage('Docker') {
+            steps {
+              sh 'docker -v'
+          }
+        }
          stage('Deliver') {
             steps {
               sh './jenkins/scripts/deliver.sh'
           }
         }
-         stage('Docker') {
-            steps {
-              sh 'docker -v'
-          }
-        }
+
     }
 }
